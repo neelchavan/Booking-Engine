@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: booking-engine
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/booking_engine?useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+booking-engine:
+  seat-hold:
+    ttl-seconds: 300
+  webhook:
+    stream-key: payment-webhooks
+    consumer-group: payment-webhooks-group
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.bookingengine: INFO
